@@ -1,0 +1,7 @@
+.intro {
+  padding: var(--space-8);
+  text-align: center;
+  background: var(--color-secondary);
+  color: white;
+  border-radius: 1rem;
+}
