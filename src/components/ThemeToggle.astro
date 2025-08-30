@@ -1,0 +1,62 @@
+---
+// filepath: c:\dev\personal-website\src\components\ThemeToggle.astro
+// import { themes } from "../utils/theme";
+// import type { Mode } from "../utils/theme";
+---
+
+<div class="theme-toggle">
+  <button id="mode-toggle">🌗 Toggle Dark/Light</button>
+  <button id="contrast-toggle">🎚 Toggle Contrast</button>
+</div>
+
+<script lang="ts" client:load>
+  import type { Mode, Contrast } from "../utils/theme";
+  export const themes: Record<"light" | "dark", string[]> = {
+    light: ["light", "light-mc", "light-hc"],
+    dark: ["dark", "dark-mc", "dark-hc"]
+  };
+
+  let mode: Mode  = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  let contrastIndex = 0; // default: normal
+
+  function applyTheme() {
+    const html = document.documentElement;
+    html.classList.remove("light", "light-mc", "light-hc", "dark", "dark-mc", "dark-hc");
+    html.classList.add(themes[mode][contrastIndex]);
+  }
+
+  // Button bindings
+  document.getElementById("mode-toggle").addEventListener("click", () => {
+    mode = mode === "light" ? "dark" : "light";
+    applyTheme();
+  });
+
+  document.getElementById("contrast-toggle").addEventListener("click", () => {
+    contrastIndex = (contrastIndex + 1) % 3;
+    applyTheme();
+  });
+
+  // Apply at startup
+  applyTheme();
+</script>
+
+<style>
+.theme-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.theme-toggle button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 6px;
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+}
+
+.theme-toggle button:hover {
+  background: var(--md-sys-color-surface-container-high);
+}
+</style>
