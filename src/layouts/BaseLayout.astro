@@ -8,21 +8,13 @@ const { title = "My Site" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
 
-    <!-- Import Material Theme CSS sets -->
-    <link rel="stylesheet" href="/src/styles/material/light.css" />
-    <link rel="stylesheet" href="/src/styles/material/light-mc.css" />
-    <link rel="stylesheet" href="/src/styles/material/light-hc.css" />
-    <link rel="stylesheet" href="/src/styles/material/dark.css" />
-    <link rel="stylesheet" href="/src/styles/material/dark-mc.css" />
-    <link rel="stylesheet" href="/src/styles/material/dark-hc.css" />
-
     <!-- Global styles -->
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <header>
       <h1>{title}</h1>
-      <ThemeToggle />
+      <ThemeControl />
     </header>
 
     <main>
